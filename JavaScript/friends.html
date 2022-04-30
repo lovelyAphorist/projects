@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- #region Sabio Code - You can Fold this region to remove it from sight -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="referrer" content="unsafe-url" />
+  <meta name="description" content="Sabio Coding Bootcamp" />
+  <meta itemprop="image" content="https://sabio.la/Sabio.png" />
+  <link rel="shortcut icon" href="https://sabio.la/Sabio.png" />
+  <link rel="icon" type="image/png" href="https://sabio.la/Sabio.png" />
+  <!-- Do Not Change the HTML title or anything between this line and the line with the 💘's -->
+  <title>Friends</title>
+  <link href="https://pw.sabio.la/dist/all-site.css" rel="stylesheet" />
+  <script src="https://pw.sabio.la/api/js/site"></script>
+  <script src="https://unpkg.com/axios@0.19.2/dist/axios.min.js"></script>
+  <script src="friendsService.js"></script>
+  <script src="userService.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel='stylesheet'>
+
+  <!-- #endregion -->
+  <!-- I 💘 Code, You 💘 Code, We all 💘 Code -->
+
+  <!-- 💡 All your CSS in here -->
+  <style></style>
+</head>
+
+<body class="sabio" data-ins="pw-00">
+  <!-- Do Not Edit or Remove this nav element -->
+  <!-- <nav class="do-not-remove navbar navbar-expand-md navbar-dark bg-dark sabio"></nav> -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand text-info" href="/index.html">Sabio Starter Tasks</a>
+
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link text-info" href="/index.html">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link text-info" href="/friends.html">Friends</a>
+        <a class="nav-item nav-link text-info" href="#">Blogs</a>
+        <a class="nav-item nav-link text-info" href="/tech.html">Tech Companies</a>
+        <a class="nav-item nav-link text-info" href="/jobs.html">Jobs</a>
+        <a class="nav-item nav-link text-info" href="events.html">Events</a>
+        <a class="nav-item nav-link text-info" href="/register.html">Register</a>
+        <a class="nav-item nav-link text-info" href="/login.html">Login</a>
+        <b><a class="nav-item nav-link disabled text-danger" id='username' href="#">Username</a></b>
+        <button type="button" class="btn btn-info user-true" id='logout'>Log Out</button>
+
+
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container-lg">
+    <div class="text-center">
+      <h2>My friends</h2>
+      <p>To create a new friend fill out this form</a></p>
+    </div>
+    <div class="row justify-content-center my-5">
+      <div class="col-lg-6">
+        <form id='friend'>
+
+          <label for="title" class="form-label">Name:</label>
+          <input type="text" id="title" name="title" placeholder="John Doe" class="form-control" required />
+
+          <label for="summary" class="form-label">Summary:</label>
+          <input type="text" id="summary" name="summary" placeholder="John Doe is currently the CEO of Acme Corp."
+            class="form-control" required />
+
+          <label for="image" class="form-label">Photo:</label>
+          <input type="text" id="image" name="image" placeholder="Photo of John Doe" class="form-control" required />
+
+
+          <button type="button" class="btn btn-info submit-form create-friend">Create New Friend!</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="container ajax sabio d-none"></div>
+
+  <div class="container workspace">
+    <div class="row clone-container"></div>
+  </div>
+  <script id="templateThree" type="text/Template">
+      <div class="col-md-3 dog-card my-3 t-3" id=''>
+          <div class="col-md-12 mb-4">
+              <div class="card border-0 shadow">
+                  <img src="https://i.pravatar.cc/400?img=48" class="card-img-top" alt="...">
+                  <div class="card-body text-center">
+                      <h5 class="card-title mb-0">Content in Template 3</h5>
+                      <div class="card-text text-black-50">Content in Template 3</div>
+                      <button type="button" class="btn btn-primary edit-me">Edit</button>
+                      <button type="button" class="btn btn-danger delete-me">Delete</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </script>
+
+  <!-- Do Not Edit or Remove this footer element -->
+  <!-- <script>
+      <footer class="do-not-remove container-fluid footer mx-auto  fb-targert sabio">
+        <p class="text-center">© Sabio.la 2019</p>
+      </footer>;
+    </script> -->
+
+  <!--👇🏻 All your JavaScript code goes below here inside this script tag 👇🏻 -->
+  <script id="candidateCode">
+
+    function startUp() {
+      wireUpButtons();
+      whoCurrentUser()
+      console.log('Fired Up')
+      fetchFriends()
+    };
+    function wireUpButtons() {
+      $('.create-friend').on('click', submitNewFriend)
+      $(".clone-container").on("click", ".edit-me", editFriendProfile);
+      $(".clone-container").on("click", ".delete-me", submitFriendDelete);
+
+    };
+    //put curent username on homepage
+    function whoCurrentUser() {
+      userService
+        .currentUser()
+        .then(onCurrentUserSuccess)
+        .catch(onCurrentUserFail)
+    }
+
+    function onCurrentUserSuccess(response) {
+      let currentUser = response.data.item.name
+      $('#username').text(currentUser)
+    }
+    function onCurrentUserFail() {
+      window.location.href = "/login.html"
+    }
+
+
+    //stuff for submitting a friends
+    function retreiveFormData() {
+      let newFriendData = {};
+      newFriendData.title = $('#title').val();
+      newFriendData.bio = "not neeeded for this project";
+      newFriendData.summary = $('#summary').val();
+      newFriendData.headline = "not neeeded for this project";
+      newFriendData.slug = Math.floor(Math.random() * 1234)
+      newFriendData.statusId = "Active";
+      newFriendData.primaryImage = $('#image').val();
+      return newFriendData
+    }
+
+    function submitNewFriend() {
+
+
+      var newFriend = retreiveFormData();
+      newFriend.id = $(this).attr("id");
+
+      if (!newFriend.id) {
+
+        friendsService
+          //addFriend
+          .addFriend(newFriend)
+          .then(onSubmitNewFriendSuccess(newFriend))
+          .catch(onSubmitNewFriendFail)
+      } else {
+        $(this).attr("id", "");
+
+        friendsService
+          .changeFriend(newFriend)
+          .then(updateDomChangeFriendSuccess(newFriend))
+          .catch(onChangeFriendFail);
+      }
+
+      function updateDomChangeFriendSuccess(friendData) {
+        $("#friend")[0].reset();
+        $(".submit-form").text("Create New Friend!");
+        console.log(friendData)
+        $("#" + friendData.id)
+          .find(".card-img-top")
+          .attr("src", friendData.primaryImage);
+        $("#" + friendData.id)
+          .find(".card-title")
+          .text(friendData.title);
+        $("#" + friendData.id)
+          .find(".card-text")
+          .text(friendData.summary);
+      }
+
+    }
+
+    function onSubmitNewFriendSuccess(friendData) {
+      console.log(friendData)
+      let friendArr = renderAllFriends(friendData);
+      $(".clone-container").append(friendArr);
+    }
+
+    function onSubmitNewFriendFail(data) {
+      console.log(data)
+    }
+    //stuff to get friends
+
+    function fetchFriends() {
+      friendsService
+        .retreiveFriends()
+        .then(onFetchFriendsSuccess)
+        .catch(onFetchFriendsFail)
+    }
+
+    function onFetchFriendsSuccess(response) {
+      console.log(response.data.item.pagedItems)
+      renderFriends(response.data.item.pagedItems)
+    }
+    function onFetchFriendsFail(response) {
+      console.log(response)
+    }
+    //stuff to create and render friend cards
+    function getTemplate() {
+      var cloneThree = $("#templateThree").html();
+      var makeCloneThree = $(cloneThree).clone();
+      return makeCloneThree;
+    }
+
+    function renderFriends(arr) {
+      $(".clone-container").empty();
+      //no inline
+      let friendArr = arr.map((friend) => renderAllFriends(friend));
+      $(".clone-container").append(friendArr);
+    }
+    function renderAllFriends(aFriend) {
+      var newTemplate = getTemplate();
+      newTemplate.find(".card-img-top").attr("src", aFriend.primaryImage.imageUrl);
+      newTemplate.find(".card-title").text(aFriend.title);
+      newTemplate.find(".card-text").text(aFriend.summary);
+      newTemplate.attr("id", aFriend.id);
+      console.log(aFriend.id)
+      return newTemplate;
+    }
+
+
+    // this makes the edit button work
+    function editFriendProfile() {
+
+      //readfrom dom then send object back like geta data from form
+      let changeName = $(this)
+        .closest(".dog-card")
+        .find(".card-title")
+        .text();
+      let changeSummary = $(this)
+        .closest(".dog-card")
+        .find(".card-text")
+        .text();
+      let changePhoto = $(this)
+        .closest(".dog-card")
+        .find(".card-img-top")
+        .attr("src");
+
+      $("#summary").val(changeSummary);
+      $("#title").val(changeName);
+      $("#image").val(changePhoto);
+      $(".submit-form").text("Update");
+      $(".submit-form").attr("id", $(this).closest(".dog-card").attr("id"));
+    }
+    // things that update the friends
+    // function submitFriendUpdate(dataFromFriend) {
+    //   friendsService
+    //     .changeFriend(dataFromFriend)
+    //     .then(onSubmitNewFriendSuccess(dataFromFriend))
+    //     .catch(onChangeFriendFail);
+    // }
+
+
+    function onChangeFriendFail(response) {
+      console.log(response)
+
+    }
+
+    //delete functionality
+    function submitFriendDelete() {
+      currentId = $(this).closest(".dog-card").attr("id");
+      friendsService
+        .deleteFriend(currentId)
+        .then(onFriendDeleteSuccess)
+        .catch(onFriendDeleteFail)
+    }
+
+    function onFriendDeleteSuccess(id) {
+      console.log(id);
+      $(`#${id}`).remove();
+    }
+
+    function onFriendDeleteFail(response) {
+      console.log(response)
+    }
+  </script>
+  <!-- 🛑 Do Not Write Any Code Below here -->
+</body>
+
+</html>

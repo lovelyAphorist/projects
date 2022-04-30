@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- #region Sabio Code - You can Fold this region to remove it from sight -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="referrer" content="unsafe-url" />
+    <meta name="description" content="Sabio Coding Bootcamp" />
+    <meta itemprop="image" content="https://sabio.la/Sabio.png" />
+    <link rel="shortcut icon" href="https://sabio.la/Sabio.png" />
+    <link rel="icon" type="image/png" href="https://sabio.la/Sabio.png" />
+    <!-- Do Not Change the HTML title or anything between this line and the line with the 💘's -->
+    <title>Starter Tasks Index</title>
+    <link href="https://pw.sabio.la/dist/all-site.css" rel="stylesheet" />
+    <script src="https://pw.sabio.la/api/js/site"></script>
+    <script src="https://unpkg.com/axios@0.19.2/dist/axios.min.js"></script>
+    <script src="friendsService.js"></script>
+    <script src="eventsService.js"></script>
+    <script src="userService.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel='stylesheet'>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxtbmL1VKbUNkHtQu1Q2ibDkY5kDycS4s&callback=initMap&libraries=&v=weekly&channel=2"
+        async></script>
+    <!-- #endregion -->
+    <!-- I 💘 Code, You 💘 Code, We all 💘 Code -->
+
+    <!-- 💡 All your CSS in here -->
+    <style>
+        #map {
+            height: 200px;
+            /* The height is 400 pixels */
+            width: 200px;
+            /* The width is the width of the web page */
+        }
+    </style>
+</head>
+
+<body class="sabio" data-ins="pw-00">
+    <!-- Do Not Edit or Remove this nav element -->
+    <!-- <nav class="do-not-remove navbar navbar-expand-md navbar-dark bg-dark sabio"></nav> -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand text-info" href="/index.html">Sabio Starter Tasks</a>
+
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link text-info" href="/index.html">Home <span
+                        class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link text-info" href="/friends.html">Friends</a>
+                <a class="nav-item nav-link text-info" href="#">Blogs</a>
+                <a class="nav-item nav-link text-info" href="/tech.html">Tech Companies</a>
+                <a class="nav-item nav-link text-info" href="/jobs.html">Jobs</a>
+                <a class="nav-item nav-link text-info" href="events.html">Events</a>
+                <a class="nav-item nav-link text-info" href="/register.html">Register</a>
+                <a class="nav-item nav-link text-info" href="/login.html">Login</a>
+                <b><a class="nav-item nav-link disabled text-danger" id='username' href="#">Username</a></b>
+                <button type="button" class="btn btn-info user-true" id='logout'>Log Out</button>
+
+
+            </div>
+        </div>
+    </nav>
+    <!-- //template for left side -->
+    <script id="templateThree" type="text/Template">
+      <div class="col-md-3 dog-card my-3 t-3">
+          <div class="col-md-12 mb-4">
+              <div class="card border-0 shadow">
+                  <img src="https://image.shutterstock.com/image-vector/events-colorful-typography-banner-600w-1356206768.jpg" class="card-img-top" alt="...">
+                  <div class="card-body text-center">
+                      <h5 class="card-title mb-0">Content in Template 3</h5>
+                      <div class="card-text text-black-50">Content in Template 3</div>
+                      <div class="card-text-description d-none text-black-50">Content in Template 3</div>
+                      <div class="card-text-date text-black-50">Content in Template 3</div>
+                      <div class="card-text-headline text-black-50 d-none">Content in Template 3</div>
+                      <div class="card-text-longitude text-black-50 d-none">Content in Template 3</div>
+                      <div class="card-text-latitude text-black-50 d-none">Content in Template 3</div>
+                      <div class="card-text-zip text-black-50 d-none">Content in Template 3</div>
+                      <div class="card-text-address text-black-50 d-none">Content in Template 3</div>
+                      <button type="button" class="btn btn-primary modal-opener">
+                            Edit Event
+                        </button>
+                     
+                  </div>
+              </div>
+          </div>
+      </div>
+    </script>
+    <!-- template for right side -->
+    <script id="templateMap" type="text/Template">
+          <div class="col-md-3 map-card my-3 t-3">
+              <div class="col-md-12 mb-4">
+                  <div class="card border-0 shadow">
+                      <img src="https://image.shutterstock.com/image-vector/events-colorful-typography-banner-600w-1356206768.jpg" class="card-img-top" alt="...">
+                      <div class="card-body text-center">
+                          <h5 class="card-title mb-0">Content in Template 3</h5>
+                          <div class="card-text text-black-50">Content in Template 3</div>
+                          <div class="card-text-description d-none text-black-50">Content in Template 3</div>
+                          <div class="card-text-date text-black-50">Content in Template 3</div>
+                          <div class="card-text-headline text-black-50 d-none">Content in Template 3</div>
+                          <div class="card-text-longitude text-black-50 d-none">Content in Template 3</div>
+                          <div class="card-text-latitude text-black-50 d-none">Content in Template 3</div>
+                          <div class="card-text-zip text-black-50 d-none">Content in Template 3</div>
+                          <div class="card-text-address text-black-50 d-none">Content in Template 3</div>
+                          <div class="card-text-bleh text-black-50">Testing theory</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </script>
+    <!-- The biggest asshole thing in the entire fucking world -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Change/Create Event</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-lg">
+                        <div class="text-center">
+                            <h2>My events</h2>
+                            <p>To create a new event fill out this form</a></p>
+                        </div>
+                        <div class="row justify-content-center my-5">
+                            <div class="col-lg-6">
+                                <form id='event'>
+                                    <label for="name" class="form-label">name:</label>
+                                    <input type="text" id="name" name="name" class="form-control" required />
+
+                                    <label for="headline" class="form-label">headline:</label>
+                                    <input type="text" id="headline" name="headline" class="form-control" required />
+
+                                    <label for="description" class="form-label">description:</label>
+                                    <input type="text" id="description" name="description" class="form-control"
+                                        required />
+
+                                    <label for="summary" class="form-label">Summary:</label>
+                                    <input type="text" id="summary" name="summary" class="form-control" required />
+
+                                    <label for="date" class="form-label">Date:</label>
+                                    <input type="text" id="date" name="date" class="form-control"
+                                        placeholder="YYYY-MM-DD" required />
+
+                                    <label for="longitude" class="form-label">longitude:</label>
+                                    <input type="text" id="longitude" name="longitude" class="form-control" required />
+
+                                    <label for="latitude" class="form-label">latitude:</label>
+                                    <input type="text" id="latitude" name="latitude" class="form-control" required />
+
+                                    <label for="zip" class="form-label">zip Code:</label>
+                                    <input type="text" id="zip" name="zip" class="form-control" required />
+
+                                    <label for="address" class="form-label">address:</label>
+                                    <input type="text" id="address" name="address" class="form-control" required />
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-info submit-form">Sumbit</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clone-container">
+        <div class="row">
+            <div class="col-lg-6 right">
+
+                <button type="button" class="btn btn-primary modal-opener">
+                    create Event
+                </button>
+            </div>
+            <div class="col-lg-3 left">
+                One of three columns
+            </div>
+        </div>
+    </div>
+
+    <div class="container ajax sabio d-none"></div>
+
+    <!-- Do Not Edit or Remove this footer element -->
+    <!-- <script>
+      <footer class="do-not-remove container-fluid footer mx-auto  fb-targert sabio">
+        <p class="text-center">© Sabio.la 2019</p>
+      </footer>;
+    </script> -->
+
+    <!--👇🏻 All your JavaScript code goes below here inside this script tag 👇🏻 -->
+    <script id="candidateCode">
+        function startUp() {
+            whoCurrentUser()
+            wireUpButtons()
+            console.log('Fired Up')
+            fetchEvents()
+            fetchNewestEvent()
+        }
+        function wireUpButtons() {
+            $("#logout").on('click', logoutUser)
+            $(document).on('click', '.modal-opener', showmodal);
+            $(document).on('click', '.submit-form', addEvent)
+        }
+
+        // modal BS
+        function showmodal() {
+            let changeName = $(this)
+                .closest(".dog-card")
+                .find(".card-title")
+                .text();
+            let changeSummary = $(this)
+                .closest(".dog-card")
+                .find(".card-text")
+                .text();
+
+
+            let changeDate = $(this)
+                .closest(".dog-card")
+                .find(".card-text-date")
+                .text();
+            let changeHeadline = $(this)
+                .closest(".dog-card")
+                .find(".card-text-headline")
+                .text();
+            let changeLongitude = $(this)
+                .closest(".dog-card")
+                .find(".card-text-longitude")
+                .text();
+            let changeLatitude = $(this)
+                .closest(".dog-card")
+                .find(".card-text-latitude")
+                .text();
+            let changeDescription = $(this)
+                .closest(".dog-card")
+                .find(".card-text-description")
+                .text();
+            let changeAddress = $(this)
+                .closest(".dog-card")
+                .find(".card-text-address")
+                .text();
+            let changeZip = $(this)
+                .closest(".dog-card")
+                .find(".card-text-zip")
+                .text();
+
+
+            $("#summary").val(changeSummary);
+            $("#name").val(changeName);
+
+            $("#date").val(changeDate);
+            $("#headline").val(changeHeadline);
+            $("#description").val(changeDescription);
+            $("#longitude").val(changeLongitude);
+            $("#latitude").val(changeLatitude);
+            $("#address").val(changeAddress);
+            $("#zip").val(changeZip);
+            $(".submit-form").text("Update");
+            $(".submit-form").attr("id", $(this).closest(".dog-card").attr("id"));
+            let modalLocal = new bootstrap.Modal(document.getElementById('exampleModal'), { backdrop: true });
+            modalLocal.show();
+
+            // $('#jobsModal').modal('show')
+
+            // jobsModal
+        }
+
+        //is there a curent user if so show logged in stuff if not direct user to login
+        function whoCurrentUser() {
+            userService
+                .currentUser()
+                .then(onCurrentUserSuccess)
+                .catch(onCurrentUserFail)
+        }
+
+        function onCurrentUserSuccess(response) {
+            console.log(response.data)
+            let currentUser = response.data.item.name
+            $('#username').text(currentUser)
+            $('.user-false').addClass('d-none')
+            addUserNameToPage(currentUser)
+        }
+
+
+        function onCurrentUserFail(data) {
+            console.log(data)
+            $('.user-true').addClass('d-none')
+            $('#username').text('Please Login')
+        }
+        // all the stuff for loging out
+
+        function logoutUser() {
+            userService
+                .logOutUser()
+                .then(onLogOutSuccess)
+                .catch(onLogOutFail)
+        }
+
+        function onLogOutSuccess(data) {
+            console.log(data)
+            window.location.href = "/login.html"
+        }
+
+        function onLogOutFail(data) {
+            console.log(data)
+        }
+
+
+        //stuff for submitting an event
+        function retreiveFormData() {
+            let newEventData = {
+                metaData: {
+                    location: {}
+                }
+            };
+            newEventData.name = $('#name').val();
+            newEventData.headline = $('#headline').val();
+            newEventData.description = $('#description').val();
+            newEventData.summary = $('#summary').val();
+            newEventData.metaData.dateStart = $('#date').val();
+            newEventData.metaData.dateEnd = $('#date').val();
+            newEventData.slug = Math.floor(Math.random() * 12345)
+            newEventData.statusId = "Active";
+            newEventData.metaData.location.longitude = $('#longitude').val();
+            newEventData.metaData.location.latitude = $('#latitude').val();
+            newEventData.metaData.location.zipCode = $('#zip').val();
+            newEventData.metaData.location.address = $('#address').val();
+            console.log(newEventData)
+            return newEventData
+        }
+
+        function addEvent() {
+            var newEvent = retreiveFormData();
+            newEvent.id = $(this).attr("id");
+            if (!newEvent.id) {
+
+                eventsService
+                    .addEvent(newEvent)
+                    .then(onSubmitNewEventSuccess)
+                    .catch(onSubmitNewEventFail)
+            } else {
+                $(this).attr("id", "");
+                eventsService
+                    .changeEvent(dataFromaEvent)
+                    .then(() => updateDomChangeEventSuccess(dataFromEvent))
+                    .catch(onChangeEventFail);
+            }
+
+
+
+        }
+
+        function updateDomChangeEventSuccess(eventData) {
+            $("#event")[0].reset();
+            $(".submit-form").text("Submit");
+            console.log(eventData)
+            $("#" + eventData.id)
+                .find(".card-img-top")
+                .attr("src", 'https://image.shutterstock.com/image-vector/events-colorful-typography-banner-600w-1356206768.jpg');
+            $("#" + eventData.id)
+                .find(".card-title")
+                .text(eventData.name);
+            $("#" + eventData.id)
+                .find(".card-text")
+                .text(eventData.headline);
+        }
+
+        function onSubmitNewEventSuccess(eventData) {
+            console.log(eventData)
+            let friendArr = renderAllFriends(eventData);
+            $(".clone-container").append(eventArr);
+        }
+
+        function onSubmitNewEventFail(data) {
+            console.log(data)
+        }
+        //stuff to get events
+
+        function fetchEvents() {
+            eventsService
+                .retreiveEvents()
+                .then(onFetchEventsSuccess)
+                .catch(onFetchEventsFail)
+        }
+
+        function onFetchEventsSuccess(response) {
+            console.log(response.data.item.pagedItems)
+            renderEvents(response.data.item.pagedItems)
+        }
+        function onFetchEventsFail(response) {
+            console.log(response)
+        }
+        //stuff to create and render event cards
+        function getTemplate() {
+            var cloneThree = $("#templateThree").html();
+            var makeCloneThree = $(cloneThree).clone();
+            return makeCloneThree;
+        }
+
+        function renderEvents(arr) {
+            $(".left").empty();
+            let eventArr = arr.map((event) => renderAllEvents(event));
+            $(".left").append(eventArr);
+        }
+        function renderAllEvents(aEvent) {
+            var newTemplate = getTemplate();
+            newTemplate.find(".card-title").text(aEvent.name);
+            newTemplate.find(".card-text").text(aEvent.summary);
+
+            newTemplate.find(".card-text-date").text(aEvent.metaData.dateStart);
+            newTemplate.find(".card-text-headline").text(aEvent.headline);
+            newTemplate.find(".card-text-longitude").text(aEvent.metaData.location.longitude);
+            newTemplate.find(".card-text-latitude").text(aEvent.metaData.location.latitude);
+            newTemplate.find(".card-text-description").text(aEvent.description);
+            newTemplate.find(".card-text-zip").text(aEvent.metaData.location.zipCode);
+            newTemplate.find(".card-text-address").text(aEvent.metaData.location.address);
+            newTemplate.attr("id", aEvent.id);
+            return newTemplate;
+        }
+
+        // things that update the events
+
+
+
+        function onChangeEventFail(response) {
+            console.log(response)
+
+        }
+
+
+        // stuff for the right side
+        // Initialize and add the map
+        function initMap(newLat, newLgn) {
+            // newlat = info.latitude;
+            // newlng = info.longitude;
+            // console.log(info)
+            // console.log(info.longitude)
+            // The location of Uluru
+            let location = { lat: newLat, lng: newLgn };
+            // The map, centered at Uluru
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 4,
+                center: location,
+            });
+            // The marker, positioned at Uluru
+            const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+            });
+        }
+        function getRightTemplate() {
+            var cloneMap = $("#templateMap").html();
+            var makeCloneMap = $(cloneMap).clone();
+            return makeCloneMap;
+        }
+
+        function renderNewestEvent(arr) {
+            let eventArr = arr.map((event) => renderNewEvents(event));
+            $(".right").append(eventArr);
+        }
+        function renderNewEvents(aEvent) {
+            var newTemplate = getRightTemplate();
+            newTemplate.find(".card-title").text(aEvent.name);
+            newTemplate.find(".card-text").text(aEvent.summary);
+            //friend
+            newTemplate.find(".card-text-date").text(aEvent.metaData.dateStart);
+            newTemplate.find(".card-text-headline").text(aEvent.headline);
+            newTemplate.find(".card-text-longitude").text(aEvent.metaData.location.longitude);
+            newTemplate.find(".card-text-latitude").text(aEvent.metaData.location.latitude);
+            newTemplate.find(".card-text-description").text(aEvent.description);
+            newTemplate.find(".card-text-zip").text(aEvent.metaData.location.zipCode);
+            newTemplate.find(".card-text-address").text(aEvent.metaData.location.address);
+            newTemplate.attr("id", aEvent.id);
+            console.log(aEvent.id)
+            return newTemplate;
+        }
+
+        //eventsService.newestEvent
+
+        function fetchNewestEvent() {
+            eventsService
+                .newestEvent()
+                .then(onFetchNewestEventsSuccess)
+                .catch(onFetchEventsFail)
+        }
+        // function testingShit(response) {
+        //     console.log(response.data.item.pagedItems)
+        // }
+
+
+        function onFetchNewestEventsSuccess(response) {
+            console.log(response.data.item.pagedItems)
+            console.log(response.data.item.pagedItems[0].metaData.location)
+            renderNewestEvent(response.data.item.pagedItems)
+            let lat = response.data.item.pagedItems[0].metaData.location.latitude
+            let lgn = (response.data.item.pagedItems[0].metaData.location.longitude)
+            initMap(lat, lgn)
+
+        }
+
+
+    </script>
+    <!-- 🛑 Do Not Write Any Code Below here -->
+</body>
+
+</html>

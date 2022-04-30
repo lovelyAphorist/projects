@@ -1,0 +1,22 @@
+{
+  "folders": [
+	{
+		"path": "..\\SabioV5"
+	},
+	{
+		"path": "."
+	}
+],
+  "settings": {
+    "prettier.disableLanguages": ["html", "js"],
+    "files.associations": {
+      "js/thirdparty/*.js": "plaintext",
+      "js/popper.js": "plaintext",
+      "js/bootstrap.4.3.1.js": "plaintext"
+    },
+    "liveServer.settings.host": "localhost",
+    "liveServer.settings.port": 1932,
+    "workbench.editor.highlightModifiedTabs": true,
+    "liveServer.settings.multiRootWorkspaceName": "Starter Tasks"
+  }
+}

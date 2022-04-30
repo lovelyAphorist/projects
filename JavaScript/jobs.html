@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- #region Sabio Code - You can Fold this region to remove it from sight -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="referrer" content="unsafe-url" />
+    <meta name="description" content="Sabio Coding Bootcamp" />
+    <meta itemprop="image" content="https://sabio.la/Sabio.png" />
+    <link rel="shortcut icon" href="https://sabio.la/Sabio.png" />
+    <link rel="icon" type="image/png" href="https://sabio.la/Sabio.png" />
+    <!-- Do Not Change the HTML title or anything between this line and the line with the 💘's -->
+    <title>Jobs</title>
+    <link href="https://pw.sabio.la/dist/all-site.css" rel="stylesheet" />
+    <script src="https://pw.sabio.la/api/js/site"></script>
+    <script src="https://unpkg.com/axios@0.19.2/dist/axios.min.js"></script>
+    <script src="friendsService.js"></script>
+    <script src="jobsService.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel='stylesheet'>
+
+    <!-- #endregion -->
+    <!-- I 💘 Code, You 💘 Code, We all 💘 Code -->
+
+    <!-- 💡 All your CSS in here -->
+    <style></style>
+</head>
+
+<body class="sabio" data-ins="pw-00">
+    <!-- Do Not Edit or Remove this nav element -->
+    <!-- <nav class="do-not-remove navbar navbar-expand-md navbar-dark bg-dark sabio"></nav> -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand text-info" href="/index.html">Sabio Starter Tasks</a>
+
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link text-info" href="/index.html">Home <span
+                        class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link text-info" href="/friends.html">Friends</a>
+                <a class="nav-item nav-link text-info" href="#">Blogs</a>
+                <a class="nav-item nav-link text-info" href="/tech.html">Tech Companies</a>
+                <a class="nav-item nav-link text-info" href="/jobs.html">Jobs</a>
+                <a class="nav-item nav-link text-info" href="events.html">Events</a>
+                <a class="nav-item nav-link text-info" href="/register.html">Register</a>
+                <a class="nav-item nav-link text-info" href="/login.html">Login</a>
+                <b><a class="nav-item nav-link disabled text-danger" id='username' href="#">Username</a></b>
+                <button type="button" class="btn btn-info user-true" id='logout'>Log Out</button>
+
+
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Summary:</p>
+                    <p id='modal-summary'>summary</p>
+                    <p>Pay:</p>
+                    <p id='modal-pay'>pay</p><br>
+                    <button type="button" class="btn btn-primary modal-opener-hide">
+                        hide button
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container-lg">
+        <div class="text-center">
+            <h2>Active Jobs</h2>
+            <p>To create a new Job fill out this form</a></p>
+        </div>
+        <div class="row justify-content-center my-5">
+            <div class="col-lg-6">
+                <form id='job'>
+
+                    <label for="title" class="form-label">Job Title:</label>
+                    <input type="text" id="title" name="title" class="form-control" required />
+                    <label for="description" class="form-label">Description:</label>
+                    <input type="text" id="description" name="description" class="form-control" required />
+                    <label for="summary" class="form-label">Summary:</label>
+                    <input type="text" id="summary" name="summary" class="form-control" required />
+                    <label for="pay" class="form-label">Pay:</label>
+                    <input type="text" id="pay" name="pay" class="form-control" required />
+                    <label for="tech-company">Tech Company ID</label>
+                    <select class="form-control" id="tech-company">
+                        <option>33818 - Ollivanders</option>
+                        <option>33817 - Weasleys Wizard Wheezes</option>
+                        <option>33816 - Gringotts</option>
+                    </select>
+
+
+
+                    <button type="button" class="btn btn-info submit-form" id='create-job'>Create New Job!</button>
+
+                </form><br><br><br>
+                <div class="input-group">
+                    <div class="form-outline">
+                        <label for="search" class="form-label">Search for:</label>
+                        <input type="text" id="search" name="search" class="form-control" required />
+                    </div>
+                    <button type="button" class="btn btn-info search" id='create-job'>Search Jobs</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="container ajax sabio d-none"></div>
+
+    <div class="container workspace">
+        <div class="row clone-container"></div>
+    </div>
+    <script id="templateThree" type="text/Template">
+
+            <div class="col-md-3 dog-card my-3 t-3">
+            <div class="col-md-12 mb-4">
+                <div class="card border-0 shadow">
+                    <img src="https://i.pravatar.cc/400?img=48" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-0">Name</h5>
+                        <div class="card-text font-weight-bold">Description:</div>
+                        <div class="card-text-one text-black-50">Description</div>
+                        <div class="card-text-two text-black-50 d-none">Summary</div>
+                        <div class="card-text-three text-black-50 d-none">Pay</div>
+                        <button type="button" class="btn btn-primary edit-me font-weight-bold">Edit</button>
+                        <button type="button" class="btn btn-primary modal-opener">
+                            More Info
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+
+
+    <script id="candidateCode">
+
+        function startUp() {
+            wireUpButtons();
+            whoCurrentUser()
+            console.log('Fired Up')
+            fetchJobs()
+        };
+        function wireUpButtons() {
+            $('#create-job').on('click', submitNewJob)
+            $(".clone-container").on("click", ".edit-me", editJobProfile);
+            // //   $(".clone-container").on("click", ".delete-me", submitJobDelete);
+            $(".search").on("click", submitJobSearch);
+
+            $(document).on('click', '.modal-opener', showmodal);
+            console.log("openers", $('.modal-opener').length)
+            //$('.modal-opener').on('click', showmodal)
+
+        };
+
+
+        function showmodal() {
+            pay = $(this)
+                .closest(".dog-card")
+                .find(".card-text-three")
+                .text();
+            summary = $(this)
+                .closest(".dog-card")
+                .find(".card-text-two")
+                .text();
+            let modalLocal = new bootstrap.Modal(document.getElementById('exampleModal'), { backdrop: true })
+            $('#exampleModal').find('#modal-summary').text(summary)
+            $('#exampleModal').find('#modal-pay').text(pay)
+            modalLocal.show();
+
+            // $('#jobsModal').modal('show')
+
+            // jobsModal
+        }
+
+
+
+        //put curent username on homepage
+        function whoCurrentUser() {
+            friendsService
+                .currentUser()
+                .then(onCurrentUserSuccess)
+                .catch(onCurrentUserFail)
+        }
+
+        function onCurrentUserSuccess(response) {
+            let currentUser = response.data.item.name
+            $('#username').text(currentUser)
+        }
+        function onCurrentUserFail() {
+            window.location.href = "/login.html"
+        }
+
+
+        //stuff for submitting a friends
+        function submitAJobForm() {
+            let companyId = $('#tech-company').val()
+            let slicedCompanyId = companyId.slice(0, 5)
+            console.log(slicedCompanyId)
+            let newJobData = {};
+            newJobData.title = $('#title').val();
+            newJobData.description = $('#description').val();
+            newJobData.summary = $('#summary').val();
+            newJobData.pay = $('#pay').val();
+            newJobData.slug = Math.floor(Math.random() * 1234)
+            newJobData.statusId = "Active";
+            newJobData.techCompanyId = slicedCompanyId;
+            newJobData.skills = ['string'];
+            console.log(newJobData)
+            return newJobData
+        }
+
+        function submitNewJob() {
+            var newJob = submitAJobForm();
+            newJob.id = $(this).attr("id");
+            if (!newJob.id) {
+
+                jobsService
+                    .submitJob(newJob)
+                    .then(onSubmitNewJobSuccess)
+                    .catch(onSubmitNewJobFail)
+            } else {
+                $(this).attr("id", "");
+                submitJobUpdate(newJob)
+            }
+
+
+
+        }
+
+        function onSubmitNewJobSuccess(jobData) {
+            $("#job")[0].reset();
+            $(".submit-form").text("Create New Job!");
+            console.log(jobData)
+            console.log(jobData.techCompany.images[0].imageUrl)
+            $("#" + jobData.id)
+                .find(".card-img-top")
+                .attr("src", jobData.techCompany.images[0].imageUrl);
+            $("#" + jobData.id)
+                .find(".card-title")
+                .text(jobData.title);
+            $("#" + jobData.id)
+                .find(".card-text-one")
+                .text(jobData.description);
+            $("#" + jobData.id)
+                .find(".card-text-two")
+                .text(jobData.summary);
+            $("#" + jobData.id)
+                .find(".card-text-three")
+                .text(jobData.pay);
+        }
+
+        function onSubmitNewJobFail(data) {
+            console.log(data)
+        }
+        //stuff to get friends
+
+        function fetchJobs() {
+            jobsService
+                .retreiveJobs()
+                .then(onFetchJobsSuccess)
+                .catch(onFetchJobsFail)
+        }
+
+        function onFetchJobsSuccess(response) {
+            console.log(response.data.item.pagedItems)
+            renderJobs(response.data.item.pagedItems)
+        }
+        function onFetchJobsFail(response) {
+            console.log(response)
+        }
+        //stuff to create and render friend cards
+        function getTemplate() {
+            var cloneThree = $("#templateThree").html();
+            var makeCloneThree = $(cloneThree).clone();
+            return makeCloneThree;
+        }
+
+        function renderJobs(arr) {
+            $(".clone-container").empty();
+            let jobArr = arr.map((job) => renderAllJobs(job));
+            $(".clone-container").append(jobArr);
+        }
+        function renderAllJobs(aJob) {
+            let photo = aJob.techCompany.images[0].imageUrl
+            console.log(aJob.techCompany.id)
+            if (!aJob.techCompany.images[0].imageUrl) {
+
+            } else if (aJob.techCompany.id === 33818) {
+                photo = 'https://static.wikia.nocookie.net/harrypotter/images/7/79/Ollivanders.png'
+            } else if (aJob.techCompany.id === 33817) {
+                photo = 'https://static.wikia.nocookie.net/harrypotter/images/c/ce/Weasleys_Wizard_Wheezes.png'
+            } else if (aJob.techCompany.id === 33816) {
+                photo = 'https://static.wikia.nocookie.net/harrypotter/images/9/96/GringottsLogoDH.png'
+            } else {
+                photo = ''
+            }
+
+
+            var newTemplate = getTemplate();
+            newTemplate.find(".card-img-top").attr("src", photo);
+            newTemplate.find(".card-title").text(aJob.title);
+            newTemplate.find(".card-text-one").text(aJob.description);
+            newTemplate.find(".card-text-two").text(aJob.summary);
+            newTemplate.find(".card-text-three").text(aJob.pay);
+            newTemplate.attr("id", aJob.id);
+            //   console.log(aJob.id)
+            //   console.log(aJob.techCompany.images[0].imageUrl)
+            return newTemplate;
+
+        }
+        // aJob.techCompany.images.imageUrl
+
+        // this makes the edit button work
+        function editJobProfile() {
+
+            let changeName = $(this)
+                .closest(".dog-card")
+                .find(".card-title")
+                .text();
+            let changeDescription = $(this)
+                .closest(".dog-card")
+                .find(".card-text-one")
+                .text();
+            let changePhoto = $(this)
+                .closest(".dog-card")
+                .find(".card-img-top")
+                .attr("src");
+            let changePay = $(this)
+                .closest(".dog-card")
+                .find(".card-text-three")
+                .text();
+            let changeSummary = $(this)
+                .closest(".dog-card")
+                .find(".card-text-two")
+                .text();
+
+            $("#summary").val(changeSummary);
+            $("#pay").val(changePay);
+            $("#description").val(changeDescription);
+            $("#title").val(changeName);
+            $("#image").val(changePhoto);
+            $(".submit-form").text("Update");
+            $(".submit-form").attr("id", $(this).closest(".dog-card").attr("id"));
+        }
+        // things that update the friends
+        function submitJobUpdate(dataFromJob) {
+            jobsService
+                .changeJob(dataFromJob)
+                .then(() => onSubmitNewJobSuccess(dataFromJob))
+                .catch(onChangeJobFail);
+        }
+
+
+        function onChangeJobFail(response) {
+            console.log(response)
+
+        }
+
+        //search functionality
+
+        function getSearchForm() {
+            let searchData = $("#search").val()
+            return searchData
+        }
+        function submitJobSearch() {
+            let formInfo = getSearchForm()
+            jobsService
+                .searchJobs(formInfo)
+                .then(renderJobsSearch)
+                .catch(onSearchJobFail);
+        }
+
+        function renderJobsSearch(response) {
+            console.log(response)
+            renderJobs(response.data.item.pagedItems)
+        }
+
+        function onSearchJobFail(response) {
+            console.log(response)
+        }
+    </script>
+    <!-- 🛑 Do Not Write Any Code Below here -->
+</body>
+
+</html>

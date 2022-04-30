@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- #region Sabio Code - You can Fold this region to remove it from sight -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="referrer" content="unsafe-url" />
+  <meta name="description" content="Sabio Coding Bootcamp" />
+  <meta itemprop="image" content="https://sabio.la/Sabio.png" />
+  <link rel="shortcut icon" href="https://sabio.la/Sabio.png" />
+  <link rel="icon" type="image/png" href="https://sabio.la/Sabio.png" />
+  <!-- Do Not Change the HTML title or anything between this line and the line with the 💘's -->
+  <title>Login</title>
+  <link href="https://pw.sabio.la/dist/all-site.css" rel="stylesheet" />
+  <script src="https://pw.sabio.la/api/js/site"></script>
+  <script src="https://unpkg.com/axios@0.19.2/dist/axios.min.js"></script>
+  <script src="friendsService.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel='stylesheet'>
+
+  <!-- #endregion -->
+  <!-- I 💘 Code, You 💘 Code, We all 💘 Code -->
+
+  <!-- 💡 All your CSS in here -->
+  <style></style>
+</head>
+
+<body class="sabio" data-ins="pw-00">
+  <!-- Do Not Edit or Remove this nav element -->
+  <!-- <nav class="do-not-remove navbar navbar-expand-md navbar-dark bg-dark sabio"></nav> -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand text-info" href="/index.html">Sabio Starter Tasks</a>
+
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link text-info" href="/index.html">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link text-info" href="/friends.html">Friends</a>
+        <a class="nav-item nav-link text-info" href="#">Blogs</a>
+        <a class="nav-item nav-link text-info" href="/tech.html">Tech Companies</a>
+        <a class="nav-item nav-link text-info" href="/jobs.html">Jobs</a>
+        <a class="nav-item nav-link text-info" href="events.html">Events</a>
+        <a class="nav-item nav-link text-info" href="/register.html">Register</a>
+        <a class="nav-item nav-link text-info" href="/login.html">Login</a>
+        <b><a class="nav-item nav-link disabled text-danger" id='username' href="#">Username</a></b>
+        <button type="button" class="btn btn-info user-true" id='logout'>Log Out</button>
+
+
+      </div>
+    </div>
+  </nav>
+  <div class="container-lg">
+    <div class="text-center">
+      <h2>User Login</h2>
+      <p>To register for a new account click here!</a></p>
+    </div>
+    <div class="row justify-content-center my-5">
+      <div class="col-lg-6">
+        <form>
+
+          <label for="email" class="form-label">Email:</label>
+          <input type="text" id="email" name="email" placeholder="John.Doe@gmail.com" class="form-control" required />
+          <label for="password" class="form-label">Password:</label>
+          <input type="password" class="form-control" id="password" name="password" required />
+
+          <button type="button" class="btn btn-info" id='form-submit-login'>Login</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="container ajax sabio d-none"></div>
+
+  <!-- Do Not Edit or Remove this footer element -->
+  <!-- <script>
+      <footer class="do-not-remove container-fluid footer mx-auto  fb-targert sabio">
+        <p class="text-center">© Sabio.la 2019</p>
+      </footer>;
+    </script> -->
+
+  <!--👇🏻 All your JavaScript code goes below here inside this script tag 👇🏻 -->
+  <script id="candidateCode">
+
+
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
+
+
+    function startUp() {
+      wireUpButtons();
+    };
+    function wireUpButtons() {
+      $('#form-submit-login').on('click', submitLoginUser)
+
+    };
+    // Register user JavaScript
+
+    //This gets the data from the form
+    function loginUserForm() {
+      let loginInfo = {};
+
+      loginInfo.email = $('#email').val();
+      loginInfo.password = $('#password').val();
+      loginInfo.tenantId = "U02LH18LZQ8";
+      return loginInfo;
+
+    }
+    function submitLoginUser() {
+      var dataLoginUser = loginUserForm()
+      friendsService
+        .loginUser(dataLoginUser)
+        .then(onLoginSuccess)
+        .catch(onLoginFail)
+    }
+    function onLoginSuccess(data) {
+      console.log(data)
+      toastr["success"]("Thanks for loginging with us!", "Login Complete!")
+      window.location.href = "/index.html"
+    }
+
+    function onLoginFail(data) {
+      console.log(data, "Fail, Fail, Fail, Fail. WEEEE WOOOOO WEEEE WOOOO WEEE WOOOOO!");
+      toastr["error"]("Sorry your login was not processed.", "Login Failure")
+    }
+  </script>
+  <!-- 🛑 Do Not Write Any Code Below here -->
+</body>
+
+</html>
