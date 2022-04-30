@@ -63,7 +63,7 @@ function MyComponent(props) {
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyBxtbmL1VKbUNkHtQu1Q2ibDkY5kDycS4s",
+    googleMapsApiKey: "Key",
   });
 
   return (
