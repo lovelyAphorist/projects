@@ -1,0 +1,32 @@
+.survey-button-flex-wrap {
+    flex-wrap: nowrap;
+}
+
+.survey-card {
+    font-family: sans-serif;
+    padding: 80px;
+}
+
+.survey-text-header {
+    font-weight: bold;
+}
+
+.survey-card-length {
+    min-height: 600px;
+}
+
+.survey-width-auto-change {
+    width: auto;
+}
+
+.chart-spacing {
+    margin-bottom: 50px;
+}
+
+.survey-table-height {
+    height: 500px;
+}
+
+.survey-chart-icon {
+    font-size: 40px
+}
